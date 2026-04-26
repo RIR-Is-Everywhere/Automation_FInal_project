@@ -36,12 +36,12 @@ class ProfilePage(BasePage):
     def update_name(self, first_name: str, last_name: str):
         self.fill(self.FIRST_NAME_INPUT, first_name)
         self.fill(self.LAST_NAME_INPUT, last_name)
-        self.click(self.SAVE_PROFILE_BUTTON)
+        self.page.locator(self.SAVE_PROFILE_BUTTON).first.click()
         self.page.wait_for_load_state("domcontentloaded")
 
     def update_email(self, email: str):
         self.fill(self.EMAIL_INPUT, email)
-        self.click(self.SAVE_PROFILE_BUTTON)
+        self.page.locator(self.SAVE_PROFILE_BUTTON).first.click()
         self.page.wait_for_load_state("domcontentloaded")
 
     def change_password(self, current_pw: str, new_pw: str, confirm_pw: str):

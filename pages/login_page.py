@@ -74,21 +74,17 @@ class LoginPage(BasePage):
     def is_logged_in(self) -> bool:
         """
         True when the current URL indicates a successful login.
-        Checks both positive signals (known dashboard paths) and
-        negative signals (not still on the login page).
         """
         current = self.page.url.lower()
 
-        # Positive: we're on a known authenticated page
+        # 1. Check for known authenticated dashboard paths
         for path in self._LOGGED_IN_PATHS:
             if path in current:
                 return True
 
-        # Positive: we left /login/ and there's no error indicator in URL
-        if "/login/" not in current and "error" not in current and "status" not in current:
-            # Make sure we're still on the same domain (not a random page)
-            if "labsqajobs.qaharbor.com" in current:
-                return True
+        # 2. Check for the presence of a logout link (strong signal)
+        if self.page.locator("a[href*='logout']").count() > 0:
+            return True
 
         return False
 
