@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+.pytest.cache/
+screenshots/FAIL_*.png
+*.pyc
+.env
+.venv/
+venv/
+node_modules/
+.DS_Store
